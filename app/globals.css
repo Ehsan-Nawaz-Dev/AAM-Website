@@ -11,6 +11,12 @@
   --border-color: #dde3ea;
   --footer-bg: #343a40;
 
+  /* Colours sampled from the AAM POWER logo */
+  --brand-navy: #12397f;
+  --brand-navy-deep: #0b2556;
+  --brand-red: #d8231b;
+  --page-bg: #f5f7fa;
+
   --radius-sm: 5px;
   --radius-md: 8px;
 
@@ -36,7 +42,7 @@ body {
   flex-direction: column;
   font-family: var(--font-roboto), "Roboto", Arial, sans-serif;
   color: var(--text-color);
-  background: #fff;
+  background: var(--page-bg);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -59,8 +65,32 @@ ul {
   padding: 0;
 }
 
+/* AAM POWER logo as a faint full-page watermark, kept light so text and
+   cards stay fully readable on top of it. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  /* Sized to span nearly the full viewport width; on phones it overflows
+     slightly so the mark still reads as a background, not a small badge. */
+  background: url("/aam-power-logo.png") center / max(96vw, 560px) auto no-repeat;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+/* Thin brand strip across the top of the page, in the logo's navy and red */
+.brand-strip {
+  flex: none;
+  height: 5px;
+  background: linear-gradient(90deg, var(--brand-navy) 0 72%, var(--brand-red) 72% 100%);
+}
+
 main {
   flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .visually-hidden {

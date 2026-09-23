@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { FaArrowRight } from "react-icons/fa";
+import BrandIcon from "./BrandIcon";
 import type { SocialLink } from "./socialLinks";
 import styles from "./SocialLinkCard.module.css";
 
@@ -8,20 +8,17 @@ type Props = {
 };
 
 export default function SocialLinkCard({ link }: Props) {
-  const Icon = link.icon;
-  const style = { "--brand": link.brand, "--tint": link.tint } as CSSProperties;
-
   return (
     <a
       href={link.href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${styles.card} ${link.wide ? styles.wide : ""}`}
-      style={style}
+      className={styles.card}
+      style={{ "--brand": link.brand } as CSSProperties}
       aria-label={`${link.name}: ${link.description} (opens in a new tab)`}
     >
-      <span className={styles.icon} aria-hidden="true">
-        <Icon />
+      <span className={styles.icon}>
+        <BrandIcon brand={link.id} className={styles.logo} />
       </span>
 
       <span className={styles.body}>
@@ -33,8 +30,16 @@ export default function SocialLinkCard({ link }: Props) {
       </span>
 
       <span className={styles.action} aria-hidden="true">
-        {link.actionLabel && <span className={styles.actionLabel}>{link.actionLabel}</span>}
-        <FaArrowRight className={styles.arrow} />
+        <svg viewBox="0 0 16 16" className={styles.arrow}>
+          <path
+            d="M3 8h9.5M8.5 4l4 4-4 4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </span>
     </a>
   );

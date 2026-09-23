@@ -1,46 +1,28 @@
-import { socialLinks } from "./socialLinks";
+import BrandIcon from "./BrandIcon";
+import { location, socialLinks } from "./socialLinks";
 import styles from "./SiteFooter.module.css";
-
-const menu = [
-  { label: "Browse Dealers", href: "https://aampower.com.pk/browse-dealers.aspx" },
-  { label: "View Products", href: "https://aampower.com.pk/our-products.aspx" },
-  { label: "User Area", href: "https://aampower.com.pk/users/login.aspx" },
-];
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
+  const links = [
+    ...socialLinks.map(({ id, name, href }) => ({ id, name, href })),
+    { id: "maps" as const, name: "Google Maps", href: location.href },
+  ];
 
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <div>
-          <p className={styles.brand}>AAM POWER</p>
-          <p className={styles.copy}>{year} &copy; ALL RIGHTS RESERVED</p>
-        </div>
+        <p className={styles.copy}>&copy; {year} AAM POWER. All rights reserved.</p>
 
-        <nav aria-label="Footer">
-          <p className={styles.heading}>Menu</p>
-          <ul className={styles.menu}>
-            {menu.map((item) => (
-              <li key={item.href}>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div>
-          <p className={styles.heading}>Follow Us</p>
-          <ul className={styles.social}>
-            {socialLinks.map(({ id, name, href, icon: Icon }) => (
-              <li key={id}>
-                <a href={href} target="_blank" rel="noopener noreferrer" aria-label={name}>
-                  <Icon aria-hidden="true" />
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className={styles.social}>
+          {links.map(({ id, name, href }) => (
+            <li key={id}>
+              <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`AAM POWER on ${name}`}>
+                <BrandIcon brand={id} className={`${styles.icon} ${id === "maps" ? styles.pin : ""}`} />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </footer>
   );

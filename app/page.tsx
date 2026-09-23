@@ -1,11 +1,10 @@
 import ConnectSection from "@/components/ConnectSection";
 import SiteFooter from "@/components/SiteFooter";
-import SiteHeader from "@/components/SiteHeader";
 
 export default function ConnectPage() {
   return (
     <>
-      <SiteHeader />
+      <div className="brand-strip" aria-hidden="true" />
       <main>
         <ConnectSection />
       </main>
