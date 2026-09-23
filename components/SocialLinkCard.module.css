@@ -1,0 +1,188 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  min-height: 88px;
+  padding: 18px 22px 18px 18px;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px rgba(0, 34, 64, 0.05);
+  color: var(--text-color);
+  transition:
+    transform var(--duration) var(--ease-out),
+    border-color var(--duration) ease,
+    box-shadow var(--duration) ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #b8cbe0;
+  box-shadow: 0 6px 16px rgba(0, 34, 64, 0.08);
+}
+
+.card:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 34, 64, 0.05);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-color: var(--primary-color);
+}
+
+/* Icon tile */
+.icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--tint);
+  color: var(--brand);
+  font-size: 22px;
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.card:hover .icon {
+  transform: translateX(2px);
+}
+
+/* Text */
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  column-gap: 10px;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--dark-color);
+}
+
+.meta {
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--subtle-color);
+}
+
+.description {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--muted-color);
+}
+
+/* Action */
+.action {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--subtle-color);
+  transition: color var(--duration) ease;
+}
+
+.actionLabel {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.arrow {
+  font-size: 14px;
+  transition: transform var(--duration) var(--ease-out);
+}
+
+.card:hover .action,
+.card:focus-visible .action {
+  color: var(--primary-color);
+}
+
+.card:hover .arrow,
+.card:focus-visible .arrow {
+  transform: translateX(3px);
+}
+
+/* Wide variant: the full-row Google Maps card */
+.wide .action {
+  padding: 8px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  transition:
+    color var(--duration) ease,
+    border-color var(--duration) ease,
+    background-color var(--duration) ease;
+}
+
+.wide:hover .action,
+.wide:focus-visible .action {
+  border-color: var(--primary-color);
+  background: #f2f8fe;
+}
+
+@media (max-width: 480px) {
+  .card {
+    gap: 14px;
+    min-height: 76px;
+    padding: 14px 16px 14px 14px;
+  }
+
+  .icon {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  /* On phones the maps card matches the others: arrow only. */
+  .wide .action {
+    padding: 0;
+    border: 0;
+    background: none !important;
+  }
+
+  .wide .actionLabel {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+    box-shadow: 0 1px 2px rgba(0, 34, 64, 0.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .icon,
+  .arrow {
+    transition: none;
+  }
+
+  .card:hover,
+  .card:hover .icon,
+  .card:hover .arrow {
+    transform: none;
+  }
+}
